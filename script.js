@@ -6,6 +6,7 @@ const width = 25;
 const height = 25;
 
 let pause = true;
+let checkArray = [];
 
 const horizontalAmount = Math.floor(document.body.clientWidth / width)+1;
 const verticalAmount = Math.floor(document.body.clientHeight / height)+1;
@@ -29,6 +30,10 @@ function gameOfLife(){
         for (let i = 0; i < checkboxArray.length; i++) {
             check(checkboxArray[i].element, i);
         }
+        for (let i = 0; i < checkboxArray.length; i++) {
+            checkboxArray[i].element.checked = checkArray[i];
+        }
+        checkArray = [];
     }
     setTimeout(function (){
         gameOfLife();
@@ -72,9 +77,10 @@ function check(checkbox, index){
         }
     }
     if(checkbox.checked){
-        checkbox.checked = alive < 4 && alive > 1;
+        checkArray.push(alive < 4 && alive > 1);
+
     }else{
-        checkbox.checked = alive === 3;
+        checkArray.push(alive === 3);
     }
 
 
